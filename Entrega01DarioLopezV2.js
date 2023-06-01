@@ -32,7 +32,10 @@ class ProductManager {
             }
             return true;
         }
+
+
         const product = {
+            id: this.getNextID(),
             title: title,
             descripcion : descripcion,
             price: price,
