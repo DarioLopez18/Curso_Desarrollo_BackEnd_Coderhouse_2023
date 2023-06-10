@@ -146,35 +146,19 @@ class ProductManager {
             let test = data.find(element=>element.id == id)
 
             if(!test) return console.log('No se puede actualizar un objeto que no existe')
-
-            if(title!=''){
+            
+            if (!title || !descripcion || !price || !thumbnail || !stock || !code) {
+                return console.log("Error: Missing Variables")
+            }else{
                 test.title = title
-                await fs.promises.writeFile(this.path,JSON.stringify(data,null,'\t'),this.format)
-            }
-            if(descripcion != ''){
                 test.descripcion = descripcion
-                await fs.promises.writeFile(this.path,JSON.stringify(data,null,'\t'),this.format)
-            }
-            if(price!=''){
                 test.price = price
-                await fs.promises.writeFile(this.path,JSON.stringify(data,null,'\t'),this.format)
-            }
-            if(thumbnail != ''){
                 test.thumbnail = thumbnail
-                await fs.promises.writeFile(this.path,JSON.stringify(data,null,'\t'),this.format)
-            }
-            if(code!=''){
                 test.code = code
-                await fs.promises.writeFile(this.path,JSON.stringify(data,null,'\t'),this.format)
-            }
-            if(stock==''){
-                test.stock = 0
-                await fs.promises.writeFile(this.path,JSON.stringify(data,null,'\t'),this.format)
-            }else if(stock>0){
                 test.stock = stock
                 await fs.promises.writeFile(this.path,JSON.stringify(data,null,'\t'),this.format)
-            }
-            
+            };
+
 
         }catch(e){
             console.log(e)
@@ -211,9 +195,9 @@ async function run(){
     console.log(await manager.getProduct())
     console.log()
     console.log('Modificamos los productos y mostramos el arreglo')
-    await manager.updateProduct(1,'Notebook Gamer','Notebook Gamer Acer Nitro 5 15.7','466.000','Sin imagen',14321,2)
-    await manager.updateProduct(2,'Memory RAM','','','','','')
-    await manager.updateProduct(4,'','','','','',0)
+    await manager.updateProduct(1,'Memoria Ram','Memoria GeiL DDR4 16GB 3000MHz Super Luce RGB Black',39550,'https://acortar.link/HgeG0G',9542,1)
+    await manager.updateProduct(2,'Notebook','Notebook Gamer Acer Nitro 5 15.6','465.999','https://acortar.link/SLS5hS',14320,1)
+    await manager.updateProduct(2,'','Notebook Gamer Acer Nitro 5 15.6','465.999','https://acortar.link/SLS5hS',14320,1)
     await manager.updateProduct(3,'','','','','',0)
     console.log(await manager.getProduct())
     console.log()
