@@ -150,19 +150,27 @@ class ProductManager {
             if(title!=''){
                 test.title = title
                 await fs.promises.writeFile(this.path,JSON.stringify(data,null,'\t'),this.format)
-            }else if(descripcion != ''){
+            }
+            if(descripcion != ''){
                 test.descripcion = descripcion
                 await fs.promises.writeFile(this.path,JSON.stringify(data,null,'\t'),this.format)
-            }else if(price!=''){
+            }
+            if(price!=''){
                 test.price = price
                 await fs.promises.writeFile(this.path,JSON.stringify(data,null,'\t'),this.format)
-            }else if(thumbnail != ''){
+            }
+            if(thumbnail != ''){
                 test.thumbnail = thumbnail
                 await fs.promises.writeFile(this.path,JSON.stringify(data,null,'\t'),this.format)
-            }else if(code!=''){
+            }
+            if(code!=''){
                 test.code = code
                 await fs.promises.writeFile(this.path,JSON.stringify(data,null,'\t'),this.format)
-            }else if(stock >= 0){
+            }
+            if(stock==''){
+                test.stock = 0
+                await fs.promises.writeFile(this.path,JSON.stringify(data,null,'\t'),this.format)
+            }else if(stock>0){
                 test.stock = stock
                 await fs.promises.writeFile(this.path,JSON.stringify(data,null,'\t'),this.format)
             }
@@ -203,8 +211,8 @@ async function run(){
     console.log(await manager.getProduct())
     console.log()
     console.log('Modificamos los productos y mostramos el arreglo')
-    await manager.updateProduct(1,'Notebook Gamer','Notebook Gamer Acer Nitro 5 15.7','','','','')
-    await manager.updateProduct(2,'Memory RAM')
+    await manager.updateProduct(1,'Notebook Gamer','Notebook Gamer Acer Nitro 5 15.7','466.000','Sin imagen',14321,2)
+    await manager.updateProduct(2,'Memory RAM','','','','','')
     await manager.updateProduct(4,'','','','','',0)
     await manager.updateProduct(3,'','','','','',0)
     console.log(await manager.getProduct())
